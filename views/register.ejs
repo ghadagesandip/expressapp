@@ -1,0 +1,46 @@
+<!-- views/pages/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../views/partials/head %>
+</head>
+<body class="container">
+
+<header>
+    <% include ../views/partials/header %>
+</header>
+
+<main>
+    <div class="jumbotron">
+        <h1>Register</h1>
+        <p>Welcome to login</p>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-login">
+                    <form action="/user/register" method="post">
+                        <input type="text" class="form-control input-sm" name="first_name" placeholder="First Name"> <br>
+                        <input type="text" class="form-control input-sm" name="last_name" placeholder="Last Name"> <br>
+                        <input type="text" class="form-control input-sm" name="username" placeholder="Username"> <br>
+                        <input type="password" class="form-control input-sm" name="password" placeholder="Password"> <br>
+                        <select name="gender"  id="" class="form-control input-sm">
+                            <option value="">Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select> <br>
+                        <input type="text"  name="email" class="form-control input-sm" placeholder="Email"> <br/>
+                        <input type="submit" value="login">
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <% include ../views/partials/footer %>
+</footer>
+
+</body>
+</html>

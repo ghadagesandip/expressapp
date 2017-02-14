@@ -4,18 +4,26 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index',{user:"John Smith"});
-  next();
+    res.render('index',{user:"Sandip Ghadge"});
+    next();
+    res.end();
+}, function(req, res){
+    console.log('called next');
 });
 
-router.get('/about', function(req, res, next) {
-  res.render('about');
-  next();
+router.get('/about', function(req, res) {
+    res.render('about');
+    res.end();
+
 });
 
-router.get('/login', function(req, res, next) {
+
+router.get('/login', function(req, res) {
   res.render('login');
-  next();
+});
+
+router.get('/register', function(req, res) {
+    res.render('register');
 });
 
 module.exports = router;
