@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var db = require('../db/db.js');
+
 
 router.post('/login', function(req, res){
     console.log(req.body);
@@ -7,8 +9,8 @@ router.post('/login', function(req, res){
 });
 
 router.post('/register', function(req, res){
-    console.log(req.body);
-    res.send('done').end();
+
+
 });
 
 
