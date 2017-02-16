@@ -5,7 +5,7 @@ module.exports = {
 
         db.query('SELECT * FROM `users`', function(err, data){
             if(!err){
-                console.log('data ', data);
+                //console.log('data ', data);
                 res.json(data).end();
 ;            }else{
                 console.log('error');
