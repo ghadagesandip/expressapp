@@ -14,10 +14,15 @@
 <main>
     <div class="jumbotron">
         <h1>Register</h1>
-        <p>Welcome to login</p>
+        <% if(message){ %>
+        <p><%= message %></p>
+        <% } %>
         <div class="row">
             <div class="col-md-3">
                 <div class="form-login">
+                    <div>
+
+                    </div>
                     <form action="/user/register" method="post">
                         <input type="text" class="form-control input-sm" name="first_name" placeholder="First Name"> <br>
                         <input type="text" class="form-control input-sm" name="last_name" placeholder="Last Name"> <br>

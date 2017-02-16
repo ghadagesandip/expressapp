@@ -5,8 +5,7 @@ var controller = require('../controller/controller.js')
 
 
 router.post('/login', function(req, res){
-    console.log(req.body);
-    res.send('done').end();
+    controller.login(req, res);
 });
 
 router.post('/register', function(req, res){

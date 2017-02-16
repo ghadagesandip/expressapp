@@ -5,6 +5,7 @@ var connection = mysql.createConnection(config.mysql);
 connection.connect(function(err){
     if(err){
         console.log('could not connect', err)
+        throw err;
     }else{
         console.log('connected');
     }
@@ -19,7 +20,7 @@ module.exports = {
            if(err)
                callback(err);
             else
-               connection.end(); callback(null, result);
+               callback(null, result); connection.end();
         });
     }
 };
