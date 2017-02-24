@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var user = require('./routes/user');
+var apiv1 = require('./routes/api/v1');
 
 
 
@@ -26,6 +27,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/user', user);
+app.use('/api/v1', apiv1);
+
 
 
 // catch 404 and forward to error handler

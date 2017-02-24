@@ -20,9 +20,11 @@ module.exports = {
            if(err)
                callback(err);
             else
-               callback(null, result); connection.end();
+               callback(null, result);
         });
+        connection.end();
     }
+
 };
 
 

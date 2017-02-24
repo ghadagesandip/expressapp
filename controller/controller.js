@@ -32,19 +32,19 @@ module.exports = {
             var sql = "SELECT * FROM `users` WHERE `username`='"+req.body.username+"'";
             console.log(sql);
             db.query(sql, function(err, result){
-                console.log(result);
+                console.log(result)
                 if(err){
-                    return ;
-                    console.log(err);
+                    console.log('error occurred', err);
+                    throw err;
                 }else{
                     if(result.length){
                         if(result[0].password != undefined){
                             passhasher.comparePassword(req.body.password, result[0].password, function(err, ismatched){
                                 if(!err){
                                     if(ismatched)
-                                        res.send('login successful').end();
+                                        res.redirect('dashboard');
                                     else
-                                        res.send('login failed').end();
+                                        res.redirect('/login?a=1')
                                 }else{
                                     res.end();
                                 }
@@ -52,6 +52,9 @@ module.exports = {
                         }else{
                             res.send('no record found').end();
                         }
+                    }else{
+                        res.redirect('/login')
+
                     }
 
 

@@ -19,7 +19,8 @@ router.get('/about', function(req, res) {
 
 
 router.get('/login', function(req, res) {
-  res.render('login');
+  console.log(req.query)
+  res.render('login',{message : ''});
 });
 
 router.get('/register', function(req, res) {
