@@ -20,7 +20,7 @@ router.get('/about', function(req, res) {
 
 router.get('/login', function(req, res) {
   console.log('req.query', req.query)
-  var message = req.query.failed ? req.query.failed  : 'welcome ';
+  var message = req.query.failed ? 'Invalid login credentials'  : 'welcome ';
   res.render('login', {message : message});
 });
 

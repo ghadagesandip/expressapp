@@ -34,7 +34,7 @@ module.exports = {
             db.query(sql, function(err, result){
                 console.log('result', result)
                 if(err){
-                    res.redirect('/login?failed=invalid username or password')
+                    res.redirect('/login?failed=invalid_credentials')
 
                 }else{
                     if(result.length){
@@ -44,7 +44,7 @@ module.exports = {
                                     if(ismatched)
                                         res.redirect('dashboard');
                                     else
-                                        res.redirect('/login?failed=invalid username or password')
+                                        res.redirect('/login?failed=invalid_credentials')
                                 }else{
                                     res.end();
                                 }
@@ -53,7 +53,7 @@ module.exports = {
                             res.send('no record found').end();
                         }
                     }else{
-                        res.redirect('/login?failed=invalid username or password')
+                        res.redirect('/login?failed=invalid_credentials')
                     }
                 }
 
