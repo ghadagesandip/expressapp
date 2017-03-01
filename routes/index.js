@@ -19,8 +19,8 @@ router.get('/about', function(req, res) {
 
 
 router.get('/login', function(req, res) {
-  console.log(req.query)
-  var message = req.message ? req.message : 'welcome ';
+  console.log('req.query', req.query)
+  var message = req.query.failed ? req.query.failed  : 'welcome ';
   res.render('login', {message : message});
 });
 
