@@ -29,13 +29,14 @@ module.exports = {
     login : function(req, res){
         if(req.body.username != undefined && req.body.password != undefined){
 
-            var sql = "SELECT * FROM `users` WHERE `username`='"+req.body.username+"'";
+            var sql = "SELECT * FROM `users` WHERE `username`='"+req.body.username.trim()+"'";
             console.log(sql);
             db.query(sql, function(err, result){
-                console.log(result)
+                console.log('result', result)
                 if(err){
-                    console.log('error occurred', err);
-                    throw err;
+                    //res.redirect('/login?failed=invalid_credentils')
+                    res.render('login',{message : 'invalid username'});
+
                 }else{
                     if(result.length){
                         if(result[0].password != undefined){
@@ -44,7 +45,8 @@ module.exports = {
                                     if(ismatched)
                                         res.redirect('dashboard');
                                     else
-                                        res.redirect('/login?a=1')
+                                        res.render('login',{message : 'invalid password'})
+                                        //res.redirect('/login?failed=wrong pass')
                                 }else{
                                     res.end();
                                 }
@@ -54,10 +56,7 @@ module.exports = {
                         }
                     }else{
                         res.redirect('/login')
-
                     }
-
-
                 }
 
             })

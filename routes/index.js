@@ -20,7 +20,8 @@ router.get('/about', function(req, res) {
 
 router.get('/login', function(req, res) {
   console.log(req.query)
-  res.render('login',{message : ''});
+  var message = req.message ? req.message : 'welcome ';
+  res.render('login', {message : message});
 });
 
 router.get('/register', function(req, res) {
