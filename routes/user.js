@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var db = require('../db/db.js');
 var userCtrl = require('../controller/user.js');
-
+var logincheck_middleware = require('../middleware/logincheck.js')
 
 router.post('/login', function(req, res){
     userCtrl.login(req, res);
@@ -12,9 +12,18 @@ router.post('/register', function(req, res){
     userCtrl.register(req, res);
 });
 
-router.get('/dashboard', function(req, res){
+router.get('/dashboard', logincheck_middleware.isLogin, function(req, res){
     res.render('dashboard');
     res.end();
+});
+
+router.get('/update-profile', function(req, res){
+    res.render('update-profile');
+    res.end();
+});
+
+router.get('/logout', function(req, res){
+    userCtrl.logout(req, res);
 });
 
 module.exports = router;

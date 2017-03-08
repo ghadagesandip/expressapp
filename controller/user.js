@@ -44,7 +44,7 @@ module.exports = {
                                 if(!err){
                                     if(ismatched){
                                         req.session.user = result[0];
-                                        res.redirect('dashboard');
+                                        res.redirect('/user/dashboard');
                                     }else
                                         res.redirect('/login?failed=invalid_credentials')
                                 }else{
@@ -62,6 +62,15 @@ module.exports = {
             })
 
 
+        }
+    },
+
+    logout : function (req, res) {
+        if(req.session.user){
+            req.session.user = null;
+            res.redirect('/login')
+        }else{
+            console.log('not loggedin')
         }
     }
 }
