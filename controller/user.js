@@ -1,5 +1,6 @@
 var db = require('../db/db.js');
 var passhasher = require('../controller/components/passhasher.js');
+var session = require('express-session')
 
 module.exports = {
 
@@ -41,9 +42,10 @@ module.exports = {
                         if(result[0].password != undefined){
                             passhasher.comparePassword(req.body.password, result[0].password, function(err, ismatched){
                                 if(!err){
-                                    if(ismatched)
+                                    if(ismatched){
+                                        req.session.user = result[0];
                                         res.redirect('dashboard');
-                                    else
+                                    }else
                                         res.redirect('/login?failed=invalid_credentials')
                                 }else{
                                     res.end();

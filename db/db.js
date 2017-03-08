@@ -2,8 +2,6 @@ var mysql = require('mysql');
 var config = require('../db/db.config.json');
 var connection = mysql.createConnection(config.mysql);
 
-
-
 module.exports = {
 
     query : function(sql, callback){
