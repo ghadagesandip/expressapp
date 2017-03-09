@@ -68,7 +68,7 @@ module.exports = {
     logout : function (req, res) {
         if(req.session.user){
             req.session.user = null;
-            res.redirect('/login')
+            res.redirect('/user/login')
         }else{
             console.log('not loggedin')
         }

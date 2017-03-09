@@ -17,15 +17,6 @@ router.get('/about', function(req, res) {
 });
 
 
-router.get('/login', logincheck_middleware.isLogin, function(req, res) {
-  console.log('req.query', req.query)
-  var message = req.query.failed ? 'Invalid login credentials'  : 'welcome ';
-  res.render('login', {message : message});
-});
-
-router.get('/register', logincheck_middleware.isLogin, function(req, res) {
-    res.render('register',{message : 'welcome'});
-});
 
 
 module.exports = router;
