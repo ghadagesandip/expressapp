@@ -5,7 +5,7 @@ module.exports = {
         console.log('request for ', req.path);
 
         if(req.session.user){
-            console.log('loggedin............. ')
+            console.log('logged in............. ')
             next();
         }else{
             if(req.path=='/user/login' || req.path=='/login' || req.path=='/register' || req.path=='/user/register'){

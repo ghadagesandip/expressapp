@@ -1,0 +1,70 @@
+<!-- views/pages/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../views/partials/head %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+
+</head>
+<body class="container">
+
+<header>
+    <% include ../views/partials/loggedin_header %>
+</header>
+
+<main>
+    <div class="jumbotron">
+        <div class="row">
+
+
+            <div class="col-lg-12">
+                <form action="" class="form-inline">
+                    <input type="text"  id="m" class="input-control" >
+                    <input type="submit" class="btn btn-primary" value="send">
+                </form>
+            </div>
+
+            <div class="col-lg-12" id="chtmessages">
+
+            </div>
+
+
+        </div>
+
+    </div>
+</main>
+
+<footer>
+    <% include ../views/partials/footer %>
+</footer>
+<script>
+
+    var socket = io.connect('http://0.0.0.0:3000');
+
+    socket.on('connect', function(data) {
+        console.log('connected');
+        socket.emit('join', 'Hello World from client');
+    });
+
+    socket.on('chatmessage', function(msg){
+         $('#chtmessages').prepend('<p>'+msg+'<p>');
+        console.log(msg);
+    });
+
+    $(function () {
+        console.log('set')
+        $('form').submit(function(){
+            socket.emit('chatmessage', $('#m').val());
+            $('#m').val('');
+
+
+
+
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

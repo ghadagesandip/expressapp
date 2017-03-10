@@ -45,4 +45,13 @@ router.get('/logout', function(req, res){
     userCtrl.logout(req, res);
 });
 
+router.get('/messages', function(req, res){
+    res.render('messages');
+    res.end();
+});
+
+
+
+
 module.exports = router;
+

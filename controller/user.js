@@ -32,7 +32,7 @@ module.exports = {
     },
 
     login : function(req, res){
-        if(req.body.username != undefined && req.body.password != undefined){
+        if(req.body.username != '' && req.body.password != ''){
 
             var sql = "SELECT * FROM `users` WHERE `username`='"+req.body.username.trim()+"'";
             console.log(sql);
@@ -64,8 +64,9 @@ module.exports = {
                 }
 
             })
-
-
+        }else{
+            res.render('login',{message : 'you entered invalid credentials'});
+            res.end();
         }
     },
 
