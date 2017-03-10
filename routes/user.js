@@ -19,7 +19,7 @@ router.get('/login', logincheck_middleware.isLogin, function(req, res) {
 
 
 router.get('/register', logincheck_middleware.isLogin, function(req, res) {
-    res.render('register',{message : 'welcome'});
+    res.render('register',{ message : 'welcome'});
 });
 
 

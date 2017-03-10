@@ -17,30 +17,55 @@
         <% if(message){ %>
         <p><%= message %></p>
         <% } %>
-        <div class="row">
-            <div class="col-md-3">
-                <div class="form-login">
-                    <div>
 
+        <form action="/user/register" method="post">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" class="form-control input-sm" name="first_name" placeholder="First Name">
                     </div>
-                    <form action="/user/register" method="post">
-                        <input type="text" class="form-control input-sm" name="first_name" placeholder="First Name"> <br>
-                        <input type="text" class="form-control input-sm" name="last_name" placeholder="Last Name"> <br>
-                        <input type="text" class="form-control input-sm" name="username" placeholder="Username"> <br>
-                        <input type="password" class="form-control input-sm" name="password" placeholder="Password"> <br>
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" class="form-control input-sm" name="last_name" placeholder="Last Name">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Gender</label>
                         <select name="gender"  id="" class="form-control input-sm">
                             <option value="">Select Gender</option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
-                        </select> <br>
-                        <input type="text"  name="email" class="form-control input-sm" placeholder="Email"> <br/>
-                        <input type="submit" value="login">
-                    </form>
+                        </select>
+                    </div>
 
                 </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" class="form-control input-sm" name="username" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" class="form-control input-sm" name="password" placeholder="Password">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="text"  name="email" class="form-control input-sm" placeholder="Email">
+                    </div>
+
+
+
+                </div>
+
             </div>
-        </div>
+
+            <input type="submit" class="btn btn-primary" value="Register">
+        </form>
+
     </div>
+
 </main>
 
 <footer>

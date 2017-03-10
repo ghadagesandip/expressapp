@@ -6,24 +6,28 @@ module.exports = {
 
     register : function(req, res){
 
-        //res.json(req.body).end();
-        if(req.body.password != undefined){
-            req.body.password = req.body.password.trim()
+
+        if(req.body.password != undefined && req.body.password != "" && req.body.username != undefined && req.body.username != "" && req.body.email != undefined && req.body.email != ""){
+            req.body.password = req.body.password.trim();
             passhasher.encryptPassword(req.body.password, function(err, hashedPassword){
                 if(!err){
                     req.body.password = hashedPassword;
-                    var sql = "INSERT INTO `expresstest`.`users` (`id`, `username`, `password`, `first_name`) VALUES (NULL, '"+req.body.username+"', '"+req.body.password+"', '"+req.body.first_name+"');"
+                    var sql = "INSERT INTO `expresstest`.`users` (`id`, `username`, `password`, `first_name`,`last_name`,`email`,`gender`) VALUES (NULL, '"+req.body.username+"', '"+req.body.password+"', '"+req.body.first_name+"', '"+req.body.last_name+"', '"+req.body.email+"', '"+req.body.gender+"');"
                     db.query(sql, function(err, data){
                         if(!err){
                             res.render('register',{message : 'registered successfully'});
                             res.end();
                         }else{
-                            console.log(err);
-                            throw err;
+                            res.render('register',{message : 'Sorry, error occurred'});
+                            res.end();
                         }
                     })
                 }
             })
+        }else{
+            res.render('register',{message : 'Enter details'});
+            console.log('password ', req.body.password);
+            res.end();
         }
     },
 
