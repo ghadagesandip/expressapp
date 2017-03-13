@@ -6,6 +6,12 @@
     <% include ../views/partials/head %>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <style>
+       #chat{
+        height : 50px;
+        width : 50px;
+       }
+    </style>
 
 </head>
 <body class="container">
@@ -17,15 +23,25 @@
 <main>
     <div class="jumbotron">
         <div class="row">
-
-
-            <div class="col-lg-12">
-                <form action="" class="form-inline">
-                    <input type="text"  id="m" class="input-control" >
-                    <input type="submit" class="btn btn-primary" value="send">
+            <div id="setNick" class="col-lg-10">
+                <form action="" id="nickForm">
+                    <p>Enter username</p>
+                    <input type="text" id="nickName">
+                    <input type="submit" value="submit">
                 </form>
             </div>
 
+            <div class="col-lg-10" id="chatscreen" style="display: none;">
+                <div id="chat"></div>
+                <form action="" id="chatform" class="form-inline">
+                    Chat : <input type="text"  id="m" class="input-control" >
+                    <input type="submit" class="btn btn-primary" value="send">
+                </form>
+                chat users
+                <div class="col-lg-2" id="users">
+
+                </div>
+            </div>
             <div class="col-lg-12" id="chtmessages">
 
             </div>
@@ -41,21 +57,48 @@
 </footer>
 <script>
 
-    var socket = io.connect('http://0.0.0.0:3000');
+    var socket = io();
+    var $nickForm = $("#nickForm");
+    var $nickbox = $("#nickName");
+
+
+    $nickForm.on('submit', function(e){
+        e.preventDefault();
+        socket.emit('new user', $nickbox.val(), function(data){
+            console.log('username from server ',data);
+            if(data){
+                $("#setNick").hide();
+                $("#chatscreen").show();
+            }else{
+                alert('username already exists');
+            }
+
+        })
+        $nickbox.val('');
+    });
+
+    socket.on('usernames', function(data){
+        var html = '';
+        for(i =0; i< data.length; i++){
+            html += data[i]+'<br>';
+        }
+        $("#users").html(html);
+    });
+
 
     socket.on('connect', function(data) {
         console.log('connected');
         socket.emit('join', 'Hello World from client');
     });
 
-    socket.on('chatmessage', function(msg){
-         $('#chtmessages').prepend('<p>'+msg+'<p>');
+    socket.on('chatmessage', function(data){
+         $('#chtmessages').prepend('<p><b>'+data.nick+'</b> : '+data.msg+'<p>');
         console.log(msg);
     });
 
     $(function () {
         console.log('set')
-        $('form').submit(function(){
+        $('#chatform').submit(function(){
             socket.emit('chatmessage', $('#m').val());
             $('#m').val('');
 

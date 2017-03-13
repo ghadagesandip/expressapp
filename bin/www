@@ -7,8 +7,8 @@
 var app = require('../app');
 var debug = require('debug')('expressapp:server');
 var http = require('http');
-
-/**
+var nicknames = []
+;/**
  * Get port from environment and store in Express.
  */
 
@@ -22,18 +22,42 @@ app.set('port', port);
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
 
+//console.log(io);
 
-io.on('connection', function(client) {
-  console.log('Client connected...');
+io.sockets.on('connection', function(socket) {
+    console.log('socket connected...');
+    console.log(socket);
+    socket.on('new user', function(data, callback){
+        if(nicknames.indexOf(data) != -1){
+            callback(false);
+        }else{
+            callback(true);
+            socket.nickname = data;
+            nicknames.push(socket.nickname);
+            updatenicknames();
 
-  client.on('join', function(data) {
+        }
+  })
+
+  function updatenicknames(){
+   io.sockets.emit('usernames', nicknames);
+  }
+
+  socket.on('join', function(data) {
     console.log(data);
-    client.emit('messages', 'Hello from server');
+    socket.emit('messages', 'Hello from server');
   });
 
-  client.on('chatmessage',function(data){
-    console.log('message from client ', data);
-    io.emit('chatmessage', data);
+  socket.on('chatmessage',function(data){
+    io.sockets.emit('chatmessage', {msg : data, nick : socket.nickname});
+  })
+
+
+  socket.on('disconnect', function(data){
+    if(!socket.nickname) return;
+
+    nicknames.splice(nicknames.indexOf(socket.nickname), 1);
+    updatenicknames();
   })
 
 });

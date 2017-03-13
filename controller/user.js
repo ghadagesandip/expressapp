@@ -12,12 +12,13 @@ module.exports = {
             passhasher.encryptPassword(req.body.password, function(err, hashedPassword){
                 if(!err){
                     req.body.password = hashedPassword;
-                    var sql = "INSERT INTO `expresstest`.`users` (`id`, `username`, `password`, `first_name`,`last_name`,`email`,`gender`) VALUES (NULL, '"+req.body.username+"', '"+req.body.password+"', '"+req.body.first_name+"', '"+req.body.last_name+"', '"+req.body.email+"', '"+req.body.gender+"');"
+                    var sql = "INSERT INTO `users` (`id`, `username`, `password`, `first_name`,`last_name`,`email`,`gender`) VALUES (NULL, '"+req.body.username+"', '"+req.body.password+"', '"+req.body.first_name+"', '"+req.body.last_name+"', '"+req.body.email+"', '"+req.body.gender+"');"
                     db.query(sql, function(err, data){
                         if(!err){
                             res.render('register',{message : 'registered successfully'});
                             res.end();
                         }else{
+                            console.log(err);
                             res.render('register',{message : 'Sorry, error occurred'});
                             res.end();
                         }
