@@ -9,7 +9,7 @@ var session = require('express-session')
 var index = require('./routes/index');
 var user = require('./routes/user');
 var apiv1 = require('./routes/api/v1');
-
+var fs = require('fs');
 
 
 var app = express();
@@ -67,6 +67,11 @@ app.use(function(err, req, res, next) {
     message: err.message,
     error: {}
   });
+});
+
+process.on('uncaughtException', (code) => {
+  console.log(`About to exit with code: ${code}`);
+  fs.appendFile("message.txt",new Date() + " Exception occurred - "+ code+"\n");
 });
 
 

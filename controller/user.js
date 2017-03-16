@@ -40,7 +40,8 @@ module.exports = {
             db.query(sql, function(err, result){
                 console.log('result', result)
                 if(err){
-                    res.redirect('/login?failed=invalid_credentials')
+                    console.log(err);
+                    res.redirect('/user/login?failed=invalid_credentials')
 
                 }else{
                     if(result.length){
@@ -51,7 +52,7 @@ module.exports = {
                                         req.session.user = result[0];
                                         res.redirect('/user/dashboard');
                                     }else
-                                        res.redirect('/login?failed=invalid_credentials')
+                                        res.redirect('/user/login?failed=invalid_credentials')
                                 }else{
                                     res.end();
                                 }
@@ -60,6 +61,7 @@ module.exports = {
                             res.send('no record found').end();
                         }
                     }else{
+                        console.log('login failed')
                         res.redirect('/login?failed=invalid_credentials')
                     }
                 }
@@ -77,6 +79,23 @@ module.exports = {
             res.redirect('/user/login')
         }else{
             console.log('not loggedin')
+        }
+    },
+
+    uploadPic : function (req, res) {
+        if(req.session.user){
+            console.log(req.file);
+            var sql = "update users set `profile_pic` = '"+req.file.filename+"'";
+            db.query(sql, function(err, data){
+                if(!err){
+                    res.redirect('/user/uploadPic?fileuploaded=true');
+                }else{
+                    console.log(err);
+                    throw err;
+                }
+            })
+
+            console.log(req.session.user);
         }
     }
 }
