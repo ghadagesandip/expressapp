@@ -6,3 +6,6 @@ Thu Mar 16 2017 19:07:04 GMT+0530 (IST) Exception occurred - Error: Can't set he
 Thu Mar 16 2017 19:07:31 GMT+0530 (IST) Exception occurred - Error: Can't set headers after they are sent.
 Thu Mar 16 2017 19:10:56 GMT+0530 (IST) Exception occurred - Error: Can't set headers after they are sent.
 Thu Mar 16 2017 19:11:27 GMT+0530 (IST) Exception occurred - Error: Can't set headers after they are sent.
+Thu Mar 16 2017 19:18:18 GMT+0530 (IST) Exception occurred - Error: Can't set headers after they are sent.
+Thu Mar 16 2017 19:19:53 GMT+0530 (IST) Exception occurred - TypeError: Cannot set property 'profile_pic' of undefined
+Thu Mar 16 2017 19:21:32 GMT+0530 (IST) Exception occurred - Error: Can't set headers after they are sent.

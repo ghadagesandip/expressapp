@@ -7,12 +7,15 @@ var logincheck_middleware = require('../middleware/logincheck.js')
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'uploads/profile_pic')
+        cb(null, 'public/uploads/profile_pic')
     },
     filename: function (req, file, cb) {
         console.log(file);
         var ext = file.originalname.substring(file.originalname.lastIndexOf('.'));
         console.log(ext);
+        if(req.session.user != undefined){
+            req.session.user.profile_pic = file.fieldname + '-' + Date.now()+ext;
+        }
         cb(null, file.fieldname + '-' + Date.now()+ext)
     }
 })

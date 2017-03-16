@@ -30,6 +30,7 @@ app.use(session({secret: 'asr4sds4a556',resave: true,saveUninitialized: true, co
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 app.use('/', index);
 app.use('/user', user);
 app.use('/api/v1', apiv1);
